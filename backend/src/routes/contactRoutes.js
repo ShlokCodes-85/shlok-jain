@@ -5,7 +5,7 @@ import { sendContactEmail } from '../controllers/contactController.js'
 const router = express.Router()
 
 router.post(
-  '/send',
+  '/',
   [
     body('name').trim().notEmpty().withMessage('Name is required'),
     body('email').trim().isEmail().withMessage('Valid email is required'),

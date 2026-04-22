@@ -7,16 +7,45 @@ dotenv.config()
 
 const app = express()
 const port = process.env.PORT || 5000
-const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173'
+const apiBasePath = process.env.API_BASE_PATH || '/api'
+const contactRoutePath = process.env.CONTACT_ROUTE_PATH || '/contact/send'
+const healthRoutePath = process.env.HEALTH_ROUTE_PATH || '/health'
+const healthMessage = process.env.HEALTH_MESSAGE || 'Contact API is running'
 
-app.use(cors({ origin: frontendUrl }))
+const normalizeOrigin = (origin) => origin.replace(/\/$/, '')
+
+const allowedOrigins = (process.env.FRONTEND_URLS || process.env.FRONTEND_URL || 'http://localhost:5173')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean)
+  .map(normalizeOrigin)
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow non-browser clients (no Origin header) like curl or health monitors.
+      if (!origin) {
+        callback(null, true)
+        return
+      }
+
+      const normalizedOrigin = normalizeOrigin(origin)
+      if (allowedOrigins.includes(normalizedOrigin)) {
+        callback(null, true)
+        return
+      }
+
+      callback(new Error('Not allowed by CORS'))
+    },
+  })
+)
 app.use(express.json())
 
-app.get('/api/health', (req, res) => {
-  res.json({ success: true, message: 'Contact API is running' })
+app.get(`${apiBasePath}${healthRoutePath}`, (req, res) => {
+  res.json({ success: true, message: healthMessage })
 })
 
-app.use('/api/contact', contactRoutes)
+app.use(`${apiBasePath}${contactRoutePath}`, contactRoutes)
 
 app.listen(port, () => {
   console.log(`Contact API running on port ${port}`)

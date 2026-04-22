@@ -14,27 +14,33 @@ export const sendContactEmail = async (req, res) => {
 
   const { name, email, subject, message } = req.body
   const receiver = process.env.CONTACT_RECEIVER_EMAIL || process.env.EMAIL_USER
+  const subjectPrefix = process.env.CONTACT_EMAIL_SUBJECT_PREFIX || 'Portfolio contact:'
+  const emailHeading = process.env.CONTACT_EMAIL_HEADING || 'New message from your portfolio'
+  const nameLabel = process.env.CONTACT_EMAIL_NAME_LABEL || 'Name:'
+  const emailLabel = process.env.CONTACT_EMAIL_EMAIL_LABEL || 'Email:'
+  const subjectLabel = process.env.CONTACT_EMAIL_SUBJECT_LABEL || 'Subject:'
+  const messageLabel = process.env.CONTACT_EMAIL_MESSAGE_LABEL || 'Message:'
 
   try {
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: receiver,
       replyTo: email,
-      subject: `Portfolio contact: ${subject}`,
+      subject: `${subjectPrefix} ${subject}`,
       text: [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Subject: ${subject}`,
+        `${nameLabel} ${name}`,
+        `${emailLabel} ${email}`,
+        `${subjectLabel} ${subject}`,
         '',
         message,
       ].join('\n'),
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
-          <h2 style="margin: 0 0 16px;">New message from your portfolio</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Subject:</strong> ${subject}</p>
-          <p style="white-space: pre-wrap;"><strong>Message:</strong><br />${message}</p>
+          <h2 style="margin: 0 0 16px;">${emailHeading}</h2>
+          <p><strong>${nameLabel}</strong> ${name}</p>
+          <p><strong>${emailLabel}</strong> ${email}</p>
+          <p><strong>${subjectLabel}</strong> ${subject}</p>
+          <p style="white-space: pre-wrap;"><strong>${messageLabel}</strong><br />${message}</p>
         </div>
       `,
     })
