@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { scrollToSection, SECTION_IDS } from "../scrollToSection.js";
 
+const PROFILE_IMAGE_SRC = "/Professional%20Pic.jpg";
+
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -152,9 +154,11 @@ function HeroSection() {
                   <div style={{ position: "absolute", inset: "-60%", background: "conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(24,95,165,0.07) 60deg, rgba(29,158,117,0.1) 120deg, transparent 180deg, rgba(24,95,165,0.05) 240deg, transparent 360deg)", animation: "rotateConic 12s linear infinite" }} />
                   {/* Avatar */}
                   <div style={{ width: 120, height: 120, borderRadius: "50%", padding: 3, background: "linear-gradient(135deg,#185FA5,#1D9E75)", position: "relative", zIndex: 1 }}>
-                    <div style={{ width: "100%", height: "100%", borderRadius: "50%", background: "#1C2333", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <span style={{ fontFamily: "Syne, sans-serif", fontSize: 32, fontWeight: 800, background: "linear-gradient(90deg,#85B7EB,#5DCAA5)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>SJ</span>
-                    </div>
+                    <img
+                      src={PROFILE_IMAGE_SRC}
+                      alt="Shlok Jain"
+                      style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover", display: "block" }}
+                    />
                     <div style={{ position: "absolute", bottom: 5, right: 5, width: 18, height: 18, borderRadius: "50%", background: "#1D9E75", border: "3px solid #161B22", animation: "pulse 2.5s ease-in-out infinite" }} />
                   </div>
                   <div style={{ zIndex: 1, textAlign: "center" }}>
@@ -211,6 +215,9 @@ export default function Home() {
         @keyframes chipFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
         @keyframes ringPulse { 0%,100%{opacity:1;transform:translate(-50%,-50%) scale(1)} 50%{opacity:0.5;transform:translate(-50%,-50%) scale(1.03)} }
         @keyframes scrollDown { 0%{transform:translateY(0);opacity:1} 100%{transform:translateY(8px);opacity:0} }
+        .hero-floating-chip {
+          display: none !important;
+        }
         .home-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: flex-start; }
         .home-hero-left { display: flex; flex-direction: column; gap: 28px; }
         .home-hero-right { display: flex; justify-content: center; align-items: center; }
@@ -229,7 +236,10 @@ export default function Home() {
         }
         @media (max-width: 900px) {
           .home-hero-scene { width: 300px !important; height: 360px !important; }
-          .hero-floating-chip { display: none !important; }
+          .hero-floating-chip:nth-child(5) { top: 10px !important; left: -70px !important; }
+          .hero-floating-chip:nth-child(6) { bottom: 65px !important; left: -62px !important; }
+          .hero-floating-chip:nth-child(7) { top: 35px !important; right: -70px !important; }
+          .hero-floating-chip:nth-child(8) { bottom: 20px !important; right: -58px !important; }
         }
         @media (max-width: 768px) {
           .home-hero-left h1 { font-size: clamp(34px, 12vw, 52px) !important; }

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+const PROFILE_IMAGE_SRC = "/Professional%20Pic.jpg";
+
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -71,9 +73,11 @@ function BioSection() {
           {/* Avatar */}
           <div style={{ position: "relative", width: 130, marginBottom: 24 }}>
             <div style={{ width: 130, height: 130, borderRadius: "50%", padding: 3, background: "linear-gradient(135deg,#185FA5,#1D9E75)" }}>
-              <div style={{ width: "100%", height: "100%", borderRadius: "50%", background: "#1C2333", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <span style={{ fontFamily: "Syne, sans-serif", fontSize: 42, fontWeight: 800, background: "linear-gradient(90deg,#85B7EB,#5DCAA5)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>SJ</span>
-              </div>
+              <img
+                src={PROFILE_IMAGE_SRC}
+                alt="Shlok Jain"
+                style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover", display: "block" }}
+              />
             </div>
             <div style={{ position: "absolute", bottom: 6, right: 6, width: 22, height: 22, borderRadius: "50%", background: "#1D9E75", border: "3px solid #0D1117", boxShadow: "0 0 10px rgba(29,158,117,0.6)", animation: "pulse 2s ease-in-out infinite" }} />
           </div>

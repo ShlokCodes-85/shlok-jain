@@ -135,6 +135,11 @@ export default function Footer() {
         .footer-social-btn.has-brand:hover .footer-icon-neutral { opacity: 0; }
         .footer-social-btn.has-brand:hover .footer-icon-brand { opacity: 1; }
         .footer-social-btn.social-github:hover { border-color: rgba(0,0,0,0.6); color: #000; background: rgba(0,0,0,0.12); }
+        html[data-theme="dark"] .page-content .footer-social-btn.social-github:hover {
+          color: #fff;
+          border-color: rgba(255,255,255,0.45);
+          background: rgba(255,255,255,0.1);
+        }
         html[data-theme="light"] .page-content .footer-social-btn.social-github:hover {
           border-color: rgba(0,0,0,0.6);
           color: #000;

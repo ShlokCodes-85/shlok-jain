@@ -77,6 +77,7 @@ function SocialIcon({ type, path }) {
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [status, setStatus] = useState(null); // null | "sending" | "sent" | "error"
+  const apiBaseUrl = import.meta.env.VITE_CONTACT_API_URL || "http://localhost:5000";
   const isFormComplete = [form.name, form.email, form.subject, form.message].every((field) => field.trim().length > 0);
   const isEmailValid = EMAIL_REGEX.test(form.email.trim());
 
@@ -89,9 +90,27 @@ export default function Contact() {
     e.preventDefault();
     if (!isFormComplete || !isEmailValid) return;
     setStatus("sending");
-    // Simulate API call — replace with: await axios.post('/api/contact', form)
-    await new Promise((r) => setTimeout(r, 1400));
-    setStatus("sent");
+
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/contact/send`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to send message");
+      }
+
+      setStatus("sent");
+      setForm({ name: "", email: "", subject: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -152,6 +171,11 @@ export default function Contact() {
         .social-icon-btn:hover .social-brand-icon.has-brand .icon-neutral { opacity: 0; }
         .social-icon-btn:hover .social-brand-icon.has-brand .icon-brand { opacity: 1; }
         .social-icon-btn.social-github:hover { border-color: rgba(0,0,0,0.6); color: #000; background: rgba(0,0,0,0.12); }
+        html[data-theme="dark"] .page-content .social-icon-btn.social-github:hover {
+          color: #fff;
+          border-color: rgba(255,255,255,0.45);
+          background: rgba(255,255,255,0.1);
+        }
         .social-icon-btn.social-linkedin:hover { border-color: rgba(10,102,194,0.5); color: #0A66C2; background: rgba(10,102,194,0.08); }
         .social-icon-btn.social-instagram:hover { border-color: rgba(225,48,108,0.5); color: #E1306C; background: rgba(225,48,108,0.1); }
         .social-icon-btn.social-email:hover { border-color: rgba(234,67,53,0.55); color: #EA4335; background: rgba(234,67,53,0.1); }
@@ -250,6 +274,15 @@ export default function Contact() {
                     <h3 style={{ fontFamily: "Syne, sans-serif", fontWeight: 700, fontSize: 18, color: "#E6EDF3", marginBottom: 8 }}>Message Sent!</h3>
                     <p style={{ fontSize: 13.5, color: "#7D8FA3" }}>Thanks for reaching out. I'll get back to you within 4 hours.</p>
                     <button onClick={() => { setForm({ name:"",email:"",subject:"",message:"" }); setStatus(null); }} style={{ marginTop: 20, padding: "9px 22px", borderRadius: 8, border: "0.5px solid #21262D", background: "transparent", color: "#E6EDF3", fontSize: 13, cursor: "pointer" }}>Send Another</button>
+                  </div>
+                ) : status === "error" ? (
+                  <div style={{ textAlign: "center", padding: "48px 20px" }}>
+                    <div style={{ width: 56, height: 56, borderRadius: "50%", background: "rgba(226, 109, 109, 0.12)", border: "0.5px solid rgba(226, 109, 109, 0.3)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E26D6D" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </div>
+                    <h3 style={{ fontFamily: "Syne, sans-serif", fontWeight: 700, fontSize: 18, color: "#E6EDF3", marginBottom: 8 }}>Oops! Something went wrong</h3>
+                    <p style={{ fontSize: 13.5, color: "#7D8FA3", marginBottom: 20 }}>Failed to send your message. Please try again or contact me directly at bjainshlok0902@gmail.com</p>
+                    <button onClick={() => setStatus(null)} style={{ padding: "9px 22px", borderRadius: 8, border: "0.5px solid #21262D", background: "transparent", color: "#E6EDF3", fontSize: 13, cursor: "pointer", marginRight: 10 }}>Go Back</button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit}>

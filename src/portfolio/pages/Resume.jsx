@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { scrollToSection, SECTION_IDS } from "../scrollToSection.js";
 
+const PROFILE_IMAGE_SRC = "/Professional%20Pic.jpg";
+
 const RESUMES = {
   webOptimized: {
     label: "Web Optimized",
@@ -94,6 +96,13 @@ function ResumeDocument({ data, layout }) {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 220px" }}>
           {/* Left main */}
           <div style={{ padding: "44px 40px", borderRight: "1px solid #F0F2F5" }}>
+            <div style={{ width: 72, height: 72, borderRadius: "50%", padding: 2, background: "linear-gradient(135deg,#185FA5,#1D9E75)", marginBottom: 14 }}>
+              <img
+                src={PROFILE_IMAGE_SRC}
+                alt={data.name}
+                style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover", display: "block" }}
+              />
+            </div>
             <h1 style={{ fontFamily: "Syne, sans-serif", fontWeight: 800, fontSize: 32, color: "#0F1117", marginBottom: 4 }}>{data.name}</h1>
             <div style={{ fontSize: 14, fontWeight: 600, background: "linear-gradient(90deg,#185FA5,#1D9E75)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 14 }}>{data.title}</div>
             <p style={{ fontSize: 12.5, color: "#5A6579", lineHeight: 1.7, marginBottom: 32, maxWidth: 520 }}>{data.summary}</p>
@@ -180,6 +189,13 @@ function ResumeDocument({ data, layout }) {
         // ── Traditional Layout: single column ─────────────────────────────
         <div style={{ padding: "44px 48px" }}>
           <div style={{ textAlign: "center", marginBottom: 32, paddingBottom: 24, borderBottom: "2px solid", borderImage: "linear-gradient(90deg,#185FA5,#1D9E75) 1" }}>
+            <div style={{ width: 78, height: 78, borderRadius: "50%", padding: 2, background: "linear-gradient(135deg,#185FA5,#1D9E75)", margin: "0 auto 12px" }}>
+              <img
+                src={PROFILE_IMAGE_SRC}
+                alt={data.name}
+                style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover", display: "block" }}
+              />
+            </div>
             <h1 style={{ fontFamily: "Syne, sans-serif", fontWeight: 800, fontSize: 34, color: "#0F1117", marginBottom: 6 }}>{data.name}</h1>
             <div style={{ fontSize: 14, fontWeight: 600, background: "linear-gradient(90deg,#185FA5,#1D9E75)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 12 }}>{data.title}</div>
             <div style={{ display: "flex", justifyContent: "center", gap: 20, flexWrap: "wrap" }}>

@@ -1,18 +1,15 @@
 {
   "name": "shlok-jain-portfolio",
   "version": "1.0.0",
-  "description": "Full-stack MERN portfolio with integrated CMS admin dashboard",
+  "description": "Static React + Vite portfolio",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "dev:frontend": "vite",
-    "dev:all": "concurrently \"vite\" \"npm run dev:backend\"",
-    "dev:backend": "cd backend && npm run dev",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "start:backend": "cd backend && npm start"
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^19.2.4",
@@ -28,15 +25,13 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
-    "vite": "^8.0.1",
-    "concurrently": "^8.2.2"
+    "vite": "^8.0.1"
   },
   "keywords": [
-    "mern",
-    "cms",
     "portfolio",
-    "jwt",
-    "mongodb"
+    "react",
+    "vite",
+    "frontend"
   ],
   "author": "Shlok Jain",
   "license": "MIT"

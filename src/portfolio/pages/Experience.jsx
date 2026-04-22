@@ -2,38 +2,40 @@ import { useEffect, useRef, useState } from "react";
 
 const EXPERIENCE_ITEMS = [
   {
-    role: "Software Development Intern",
-    org: "Your Company Name",
-    period: "May 2025 - Jul 2025",
+    role: "AI/ML Intern",
+    org: "Fundora",
+    period: "Jul 2025 - Dec 2025",
     mode: "Internship",
-    desc: "Worked on product features end-to-end, collaborated with mentors, and delivered improvements across frontend and backend modules.",
+    desc: "Remote internship based in Mumbai, Maharashtra, India where I focused on building production-grade data and recommendation workflows in a startup environment.",
     highlights: [
-      "Built and shipped responsive UI components for production-facing pages.",
-      "Integrated APIs and improved data flow between client and server modules.",
-      "Fixed critical bugs and supported QA with reproducible test scenarios.",
+      "Scraped and collected 5,000+ structured records using Python and Apify to support ML pipelines.",
+      "Used Pandas and NumPy for data cleaning, feature preparation, and preprocessing workflows.",
+      "Designed and trained a foundational recommendation engine using Scikit-learn.",
+      "Took ownership of high-impact data tasks while collaborating in a fast-paced startup team.",
     ],
     documents: [
       {
-        label: "View Certificate + LOR",
-        href: "/Internship-Docs.pdf",
+        label: "View Internship Certificate",
+        href: "/Fundora%20Internship%20Documents.pdf",
       },
     ],
   },
   {
-    role: "Frontend Development Intern",
-    org: "Your Company Name",
-    period: "Jan 2025 - Apr 2025",
+    role: "Machine Learning Intern",
+    org: "Acmegrade",
+    period: "May 2024 - Jul 2024",
     mode: "Internship",
-    desc: "Contributed to frontend modules, improved page performance, and collaborated with the design team to deliver production-ready interfaces.",
+    desc: "Remote internship based in Mumbai, Maharashtra, India focused on supervised learning pipelines and recommendation systems.",
     highlights: [
-      "Implemented reusable components and maintained a consistent design system.",
-      "Optimized load performance by reducing render-blocking assets.",
-      "Worked with backend APIs and handled edge-case UI states for reliability.",
+      "Built a cancer diagnostic classification pipeline with 90%+ accuracy using Logistic Regression, SVM, and Random Forest.",
+      "Developed a content-based movie recommendation engine using TF-IDF vectorization and cosine similarity.",
+      "Executed end-to-end ML workflows including EDA, feature engineering, scaling, and dimensionality reduction.",
+      "Validated models using ROC-AUC, Precision, Recall, and F1-score metrics.",
     ],
     documents: [
       {
-        label: "View Certificate",
-        href: "/Frontend-Internship-Certificate.pdf",
+        label: "View Internship Certificate",
+        href: "/Acmegrade%20Internship%20Completion.pdf",
       },
     ],
   },

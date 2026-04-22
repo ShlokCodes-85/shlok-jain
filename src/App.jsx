@@ -10,13 +10,6 @@ import Projects from './portfolio/pages/Projects.jsx'
 import Skills from './portfolio/pages/Skills.jsx'
 import { getSectionFromHash, scrollToSection, SECTION_IDS } from './portfolio/scrollToSection.js'
 
-import AdminLogin from './admin/pages/AdminLogin.jsx'
-import AdminDashboard from './admin/pages/AdminDashboard.jsx'
-import CreateContent from './admin/pages/CreateContent.jsx'
-import ContentList from './admin/pages/ContentList.jsx'
-import EditContent from './admin/pages/EditContent.jsx'
-import ProtectedRoute from './admin/components/ProtectedRoute.jsx'
-
 // Portfolio component
 function PortfolioPage() {
   useEffect(() => {
@@ -55,45 +48,6 @@ function PortfolioPage() {
 export default function App() {
   return (
     <Routes>
-      <Route path="/admin/login" element={<AdminLogin />} />
-      <Route
-        path="/admin/dashboard"
-        element={
-          <ProtectedRoute>
-            <AdminDashboard />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/admin/content"
-        element={
-          <ProtectedRoute>
-            <AdminDashboard>
-              <ContentList />
-            </AdminDashboard>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/admin/create"
-        element={
-          <ProtectedRoute>
-            <AdminDashboard>
-              <CreateContent />
-            </AdminDashboard>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/admin/edit/:id"
-        element={
-          <ProtectedRoute>
-            <AdminDashboard>
-              <EditContent />
-            </AdminDashboard>
-          </ProtectedRoute>
-        }
-      />
       <Route path="/" element={<PortfolioPage />} />
       <Route path="*" element={<PortfolioPage />} />
     </Routes>
