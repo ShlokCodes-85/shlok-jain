@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  envPrefix: ['VITE_', 'BACKEND_', 'FRONTEND_'],
+  envPrefix: ['VITE_', 'BACKEND_', 'FRONTEND_', 'API_', 'HEALTH_', 'CONTACT_'],
   resolve: {
     dedupe: ['react', 'react-dom'],
     alias: {

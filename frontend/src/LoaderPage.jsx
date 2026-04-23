@@ -1,10 +1,26 @@
 import { useEffect, useState } from 'react'
 
-const apiBaseUrl =
+const apiBaseUrl = (
   import.meta.env.BACKEND_URL ||
   import.meta.env.VITE_CONTACT_API_URL ||
-  'https://shlok-jain.onrender.com'
-const healthUrl = `${apiBaseUrl}/api/health-check`
+  ''
+).trim()
+
+const apiBasePath = (
+  import.meta.env.API_BASE_PATH ||
+  '/api'
+).trim()
+
+const healthCheckPath = (
+  import.meta.env.HEALTH_CHECK_PATH ||
+  '/health-check'
+).trim()
+
+if (!apiBaseUrl) {
+  console.error('BACKEND_URL environment variable is not set. Please set it before running the app.')
+}
+
+const healthUrl = `${apiBaseUrl}${apiBasePath}${healthCheckPath}`
 
 export default function LoaderPage({ onReady }) {
   const [status, setStatus] = useState('loading') // loading | ready | error
