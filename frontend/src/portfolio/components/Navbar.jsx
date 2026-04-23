@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { scrollToSection, SECTION_IDS } from "../scrollToSection.js";
-import { useTheme } from "../../context/ThemeContext.jsx";
+import { useTheme } from "../../context/useTheme.js";
 
 const NAV_LINKS = [
   { label: "Home", sectionId: SECTION_IDS.home },
@@ -144,6 +144,8 @@ export default function Navbar() {
         .nbtn-ghost:hover { border-color: rgba(29,158,117,0.5) !important; color: #5DCAA5 !important; }
         .site-nav {
           padding: 0 40px;
+          box-sizing: border-box;
+          width: 100%;
         }
         .nav-actions-mobile {
           display: none;
@@ -160,7 +162,10 @@ export default function Navbar() {
           .site-nav { padding: 0 24px !important; }
         }
         @media (max-width: 768px) {
-          .site-nav { padding: 0 16px !important; }
+          .site-nav {
+            padding-left: max(16px, env(safe-area-inset-left)) !important;
+            padding-right: max(16px, env(safe-area-inset-right)) !important;
+          }
           .nav-links-desktop { display: none !important; }
           .nav-actions-desktop { display: none !important; }
           .nav-mobile-controls { display: inline-flex !important; }
@@ -175,6 +180,9 @@ export default function Navbar() {
         }
         .mobile-menu {
           position: fixed; top: 64px; left: 0; right: 0;
+          box-sizing: border-box;
+          width: 100%;
+          max-width: 100%;
           background: rgba(13,17,23,0.98);
           backdrop-filter: blur(20px);
           border-bottom: 0.5px solid #21262D;
@@ -274,6 +282,9 @@ export default function Navbar() {
           position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
           display: "flex", alignItems: "center", justifyContent: "space-between",
           padding: "0 40px", height: 64,
+          boxSizing: "border-box",
+          width: "100%",
+          maxWidth: "100%",
           background: "transparent",
           backdropFilter: "blur(20px)",
           borderBottom: scrolled
@@ -384,7 +395,7 @@ export default function Navbar() {
           <button
             className="nav-hamburger"
             onClick={() => setMenuOpen((o) => !o)}
-            style={{ display: "none", flexDirection: "column", gap: 5, background: "none", border: "none", cursor: "pointer", padding: 4 }}
+            style={{ display: "none", flexDirection: "column", gap: 5, background: "none", border: "none", cursor: "pointer", padding: 4, flexShrink: 0 }}
             aria-label="Toggle menu"
           >
             {[0, 1, 2].map((i) => (

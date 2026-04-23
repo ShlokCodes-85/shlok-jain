@@ -97,6 +97,23 @@ body,
   min-height: 100%;
 }
 
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#root,
+.page-content {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.page-content > * {
+  max-width: 100%;
+}
+
 body {
   background: var(--app-bg);
 }

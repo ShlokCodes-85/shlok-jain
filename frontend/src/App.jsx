@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import LoaderPage from './LoaderPage.jsx'
 import About from './portfolio/pages/About.jsx'
 import Contact from './portfolio/pages/Contact.jsx'
 import Footer from './portfolio/components/Footer.jsx'
@@ -46,10 +46,9 @@ function PortfolioPage() {
 }
 
 export default function App() {
+  const [isBackendReady, setIsBackendReady] = useState(false)
+
   return (
-    <Routes>
-      <Route path="/" element={<PortfolioPage />} />
-      <Route path="*" element={<PortfolioPage />} />
-    </Routes>
+    isBackendReady ? <PortfolioPage /> : <LoaderPage onReady={() => setIsBackendReady(true)} />
   )
 }

@@ -1,14 +1,5 @@
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
-
-const ThemeContext = createContext(null);
-
-function getInitialTheme() {
-  const saved = window.localStorage.getItem("theme");
-  if (saved === "light" || saved === "dark") {
-    return saved;
-  }
-  return "light";
-}
+import { useEffect, useRef, useState } from "react";
+import { ThemeContext, getInitialTheme } from "./themeContext.js";
 
 export function ThemeProvider({ children }) {
   const WIPE_DURATION_MS = 420;
@@ -27,12 +18,6 @@ export function ThemeProvider({ children }) {
     document.documentElement.setAttribute("data-theme", theme);
     window.localStorage.setItem("theme", theme);
   }, [theme]);
-
-  useEffect(() => {
-    if (!isWiping) {
-      setVisualTheme(theme);
-    }
-  }, [theme, isWiping]);
 
   useEffect(() => clearTimers, []);
 
@@ -58,12 +43,12 @@ export function ThemeProvider({ children }) {
     ? "rgba(243, 247, 252, 0.42)"
     : "rgba(13, 17, 23, 0.38)";
 
-  const value = useMemo(() => ({
+  const value = {
     theme,
     isDark: visualTheme === "dark",
     isWiping,
     toggleTheme,
-  }), [theme, visualTheme, isWiping]);
+  };
 
   return (
     <ThemeContext.Provider value={value}>
@@ -77,10 +62,3 @@ export function ThemeProvider({ children }) {
   );
 }
 
-export function useTheme() {
-  const ctx = useContext(ThemeContext);
-  if (!ctx) {
-    throw new Error("useTheme must be used within ThemeProvider");
-  }
-  return ctx;
-}

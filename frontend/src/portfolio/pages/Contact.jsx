@@ -77,7 +77,10 @@ function SocialIcon({ type, path }) {
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [status, setStatus] = useState(null); // null | "sending" | "sent" | "error"
-  const apiBaseUrl = import.meta.env.VITE_CONTACT_API_URL || "http://localhost:5000";
+  const apiBaseUrl =
+    import.meta.env.BACKEND_URL ||
+    import.meta.env.VITE_CONTACT_API_URL ||
+    "https://shlok-jain.onrender.com";
   const isFormComplete = [form.name, form.email, form.subject, form.message].every((field) => field.trim().length > 0);
   const isEmailValid = EMAIL_REGEX.test(form.email.trim());
 
@@ -188,6 +191,7 @@ export default function Contact() {
         @media (max-width: 860px) {
           .contact-hero { padding: 28px 24px 52px !important; }
           .contact-hero-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+          .contact-hero-grid > div { min-width: 0; }
           .contact-hero-grid > div:first-child { width: 100%; max-width: none; }
           .contact-intro-text { max-width: none !important; }
           .contact-hero-grid > div:last-child { width: 100%; max-width: 520px; margin: 0 auto; }
@@ -202,6 +206,7 @@ export default function Contact() {
           .contact-social-grid { grid-template-columns: 1fr !important; }
           .contact-form-card { padding: 20px 16px 18px !important; }
           .contact-hero h1 { font-size: clamp(36px, 11vw, 48px) !important; }
+          .contact-hero h1 { overflow-wrap: anywhere; word-break: break-word; }
         }
       `}</style>
 
