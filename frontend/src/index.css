@@ -20,7 +20,8 @@ html[data-theme="light"] .page-content {
 /* Re-invert media/canvas so visuals don't look like photo negatives. */
 html[data-theme="light"] .page-content img,
 html[data-theme="light"] .page-content video,
-html[data-theme="light"] .page-content canvas {
+html[data-theme="light"] .page-content canvas,
+html[data-theme="light"] .page-content iframe {
   filter: invert(1) hue-rotate(180deg);
 }
 

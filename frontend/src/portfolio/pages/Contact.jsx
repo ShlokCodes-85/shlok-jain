@@ -78,23 +78,23 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [status, setStatus] = useState(null); // null | "sending" | "sent" | "error"
   const apiBaseUrl = (
-    import.meta.env.BACKEND_URL ||
+    import.meta.env.VITE_BACKEND_URL ||
     import.meta.env.VITE_CONTACT_API_URL ||
     ''
   ).trim();
 
   const apiBasePath = (
-    import.meta.env.API_BASE_PATH ||
+    import.meta.env.VITE_API_BASE_PATH ||
     '/api'
   ).trim()
 
   const contactRoutePath = (
-    import.meta.env.CONTACT_ROUTE_PATH ||
+    import.meta.env.VITE_CONTACT_ROUTE_PATH ||
     '/contact/send'
   ).trim()
 
   if (!apiBaseUrl) {
-    console.error('BACKEND_URL environment variable is not set. Please set it before running the app.')
+    console.error('VITE_BACKEND_URL environment variable is not set. Please set it before running the app.')
   }
   const isFormComplete = [form.name, form.email, form.subject, form.message].every((field) => field.trim().length > 0);
   const isEmailValid = EMAIL_REGEX.test(form.email.trim());

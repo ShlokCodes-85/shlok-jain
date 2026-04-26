@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { scrollToSection, SECTION_IDS } from "../scrollToSection.js";
 import { useTheme } from "../../context/useTheme.js";
 
@@ -9,14 +10,18 @@ const NAV_LINKS = [
   { label: "Skills", sectionId: SECTION_IDS.skills },
   { label: "Projects", sectionId: SECTION_IDS.projects },
   { label: "Contact", sectionId: SECTION_IDS.contact },
-  { label: "Resume", href: "/Resume.pdf", external: true },
+  { label: "Resume", path: "/resume" },
 ];
 
 export default function Navbar() {
   const { isDark, isWiping, toggleTheme } = useTheme();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(SECTION_IDS.home);
+  const isResumeRoute = location.pathname === "/resume";
+  const isPortfolioRoute = location.pathname === "/";
 
   useEffect(() => {
     const fn = () => {
@@ -79,14 +84,20 @@ export default function Navbar() {
     };
   }, []);
 
-  const onNavClick = (sectionId, href, external = false) => {
-    if (external && href) {
-      window.open(href, "_blank", "noopener,noreferrer");
+  const onNavClick = (sectionId, path) => {
+    if (path) {
+      navigate(path);
       setMenuOpen(false);
       return;
     }
 
     if (!sectionId) {
+      setMenuOpen(false);
+      return;
+    }
+
+    if (location.pathname !== "/") {
+      navigate(`/#${sectionId}`);
       setMenuOpen(false);
       return;
     }
@@ -308,15 +319,15 @@ export default function Navbar() {
 
         {/* Desktop nav links */}
         <ul className="nav-links-desktop" style={{ display: "flex", gap: 32, listStyle: "none", margin: 0, padding: 0, alignItems: "center" }}>
-          {NAV_LINKS.map(({ label, sectionId, href, external }) => {
-            const isActive = activeSection === sectionId;
+          {NAV_LINKS.map(({ label, sectionId, path }) => {
+            const isActive = path ? isResumeRoute : (isPortfolioRoute && activeSection === sectionId);
             return (
               <li key={label}>
                 <a
-                  href={href || (sectionId ? `#${sectionId}` : "#")}
+                  href={path || (sectionId ? `#${sectionId}` : "#")}
                   onClick={(e) => {
                     e.preventDefault();
-                    onNavClick(sectionId, href, external);
+                    onNavClick(sectionId, path);
                   }}
                   className={`nav-link-item${isActive ? " active" : ""}`}
                   style={{
@@ -409,15 +420,15 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div className={`mobile-menu${menuOpen ? " open" : ""}`} style={{ display: menuOpen ? "flex" : "none" }}>
-        {NAV_LINKS.map(({ label, sectionId, href, external }) => (
+        {NAV_LINKS.map(({ label, sectionId, path }) => (
           <a
             key={label}
-            href={href || (sectionId ? `#${sectionId}` : "#")}
+            href={path || (sectionId ? `#${sectionId}` : "#")}
             onClick={(e) => {
               e.preventDefault();
-              onNavClick(sectionId, href, external);
+              onNavClick(sectionId, path);
             }}
-            className={`mobile-link${activeSection === sectionId ? " active" : ""}`}
+            className={`mobile-link${(path ? isResumeRoute : (isPortfolioRoute && activeSection === sectionId)) ? " active" : ""}`}
           >
             {label}
           </a>

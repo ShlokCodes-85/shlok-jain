@@ -84,8 +84,10 @@ function BioSection() {
 
           <h2 style={{ fontFamily: "Syne, sans-serif", fontWeight: 800, fontSize: 26, color: "#E6EDF3", marginBottom: 4 }}>Shlok Jain</h2>
           <div style={{ fontSize: 14, fontWeight: 600, background: "linear-gradient(90deg,#185FA5,#1D9E75)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 16 }}>
-            MERN & AI/ML Engineer
+            Full Stack AI Engineer
           </div>
+          <p style={{ fontSize: 12.5, color: "#7D8FA3", lineHeight: 1.6, marginBottom: 2 }}>BSc Information Technology</p>
+          <p style={{ fontSize: 12.5, color: "#7D8FA3", lineHeight: 1.6, marginBottom: 16 }}>CGPA - 9.6</p>
         </div>
 
         {/* Right content */}
@@ -116,7 +118,7 @@ function BioSection() {
           </h1>
 
           <p style={{ fontSize: 15, color: "#7D8FA3", lineHeight: 1.8, marginBottom: 18 }}>
-            Hey! I am Shlok Jain, a developer focused equally on <strong style={{ color: "#E6EDF3", fontWeight: 600 }}>MERN full-stack development</strong> and <strong style={{ color: "#E6EDF3", fontWeight: 600 }}>AI/ML engineering</strong>, building clean and user-friendly products people actually enjoy using.
+            Hey! I am Shlok Jain, a <strong style={{ color: "#E6EDF3", fontWeight: 600 }}>Full Stack AI Engineer</strong> building clean and user-friendly products people actually enjoy using.
           </p>
           <p style={{ fontSize: 15, color: "#7D8FA3", lineHeight: 1.8, marginBottom: 18 }}>
             I enjoy working across both tracks, from APIs, databases, and frontend experience to model-driven features and intelligent product flows. Whether it is shipping a full-stack feature or improving an AI-powered interaction, I like refining things step by step.
