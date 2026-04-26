@@ -165,8 +165,6 @@ function HeroSection() {
                     <div style={{ fontFamily: "Syne, sans-serif", fontWeight: 700, fontSize: 18, color: "#E6EDF3" }}>Shlok Jain</div>
                     <div style={{ fontSize: 12.5, color: "#7D8FA3", lineHeight: 1.6, marginTop: 4 }}>
                       <span style={{ background: "linear-gradient(90deg,#85B7EB,#5DCAA5)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", fontWeight: 600 }}>Full Stack AI Engineer</span>
-                      <br /><span style={{ WebkitTextFillColor: "#7D8FA3", fontSize: 11.5 }}>BSc Information Technology</span>
-                      <br /><span style={{ WebkitTextFillColor: "#7D8FA3", fontSize: 11.5 }}>CGPA - 9.6</span>
                       <br /><span style={{ WebkitTextFillColor: "#7D8FA3", fontSize: 11.5 }}>Fresher · Open to work</span>
                     </div>
                   </div>

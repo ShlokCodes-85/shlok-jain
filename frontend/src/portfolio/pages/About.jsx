@@ -2,6 +2,20 @@ import { useEffect, useRef, useState } from "react";
 
 const PROFILE_IMAGE_SRC = "/Professional%20Pic.jpg";
 
+const BIRTH_DATE = new Date(2005, 1, 9);
+
+function getAge(birthDate) {
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDifference = today.getMonth() - birthDate.getMonth();
+
+  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+    age -= 1;
+  }
+
+  return age;
+}
+
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -61,6 +75,7 @@ function FocusIcon({ type }) {
 // ── Hero bio ─────────────────────────────────────────────────────────────────
 function BioSection() {
   const [ref, inView] = useInView(0.1);
+  const age = getAge(BIRTH_DATE);
   return (
     <section className="about-section" ref={ref} style={{ background: "#0D1117", padding: "72px 40px 80px" }}>
       <div className="about-layout" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "300px 1fr", gap: 72, alignItems: "flex-start" }}>
@@ -118,7 +133,7 @@ function BioSection() {
           </h1>
 
           <p style={{ fontSize: 15, color: "#7D8FA3", lineHeight: 1.8, marginBottom: 18 }}>
-            Hey! I am Shlok Jain, a <strong style={{ color: "#E6EDF3", fontWeight: 600 }}>Full Stack AI Engineer</strong> building clean and user-friendly products people actually enjoy using.
+            Hey! I am Shlok Jain, a {age} year old Information Technology graduate from Vidaylankar School Of Information Technology (VSIT), Mumbai. I am a <strong style={{ color: "#E6EDF3", fontWeight: 600 }}>Full Stack AI Engineer</strong> building clean and user-friendly products people actually enjoy using.
           </p>
           <p style={{ fontSize: 15, color: "#7D8FA3", lineHeight: 1.8, marginBottom: 18 }}>
             I enjoy working across both tracks, from APIs, databases, and frontend experience to model-driven features and intelligent product flows. Whether it is shipping a full-stack feature or improving an AI-powered interaction, I like refining things step by step.
