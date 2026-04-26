@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import About from './portfolio/pages/About.jsx'
 import Contact from './portfolio/pages/Contact.jsx'
@@ -9,6 +9,7 @@ import Navbar from './portfolio/components/Navbar.jsx'
 import Projects from './portfolio/pages/Projects.jsx'
 import ResumeViewer from './portfolio/pages/ResumeViewer.jsx'
 import Skills from './portfolio/pages/Skills.jsx'
+import LoaderPage from './LoaderPage.jsx'
 import { getSectionFromHash, scrollToSection, SECTION_IDS } from './portfolio/scrollToSection.js'
 
 // Portfolio component
@@ -47,6 +48,12 @@ function PortfolioPage() {
 }
 
 export default function App() {
+  const [isBackendReady, setIsBackendReady] = useState(false)
+
+  if (!isBackendReady) {
+    return <LoaderPage onReady={() => setIsBackendReady(true)} />
+  }
+
   return (
     <Routes>
       <Route path="/" element={<PortfolioPage />} />
