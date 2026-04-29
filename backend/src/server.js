@@ -7,7 +7,7 @@ dotenv.config()
 
 const app = express()
 const port = process.env.PORT || 5000
-const backendUrl = process.env.BACKEND_URL || `http://localhost:${port}`
+const backendUrl = process.env.VITE_BACKEND_URL || `http://localhost:${port}`
 const apiBasePath = process.env.API_BASE_PATH || '/api'
 const contactRoutePath = process.env.CONTACT_ROUTE_PATH || '/contact/send'
 const healthRoutePath = process.env.HEALTH_ROUTE_PATH || '/health'
@@ -16,7 +16,7 @@ const healthMessage = process.env.HEALTH_MESSAGE || 'Contact API is running'
 
 const normalizeOrigin = (origin) => origin.replace(/\/$/, '')
 
-const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+const allowedOrigins = (process.env.VITE_FRONTEND_URL || 'http://localhost:5173')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean)
