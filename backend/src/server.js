@@ -16,27 +16,43 @@ const healthMessage = process.env.HEALTH_MESSAGE || 'Contact API is running'
 
 const normalizeOrigin = (origin) => origin.replace(/\/$/, '')
 
-const allowedOrigins = (process.env.VITE_FRONTEND_URL || 'http://localhost:5173')
-  .split(',')
-  .map((origin) => origin.trim())
-  .filter(Boolean)
-  .map(normalizeOrigin)
+// Check both VITE_FRONTEND_URL and FRONTEND_URL for compatibility
+const configuredFrontendUrl = process.env.VITE_FRONTEND_URL || process.env.FRONTEND_URL || ''
+const allowedOrigins = configuredFrontendUrl
+  ? configuredFrontendUrl
+      .split(',')
+      .map((origin) => origin.trim())
+      .filter(Boolean)
+      .map(normalizeOrigin)
+  : ['http://localhost:5173', 'http://localhost:3000']
+
+console.log('Environment variables loaded:');
+console.log('VITE_FRONTEND_URL:', process.env.VITE_FRONTEND_URL || '(not set)');
+console.log('FRONTEND_URL:', process.env.FRONTEND_URL || '(not set)');
+console.log('Using Frontend URL:', configuredFrontendUrl || '(using defaults)');
+console.log('Allowed origins:', allowedOrigins);
 
 app.use(
   cors({
     origin: (origin, callback) => {
       // Allow non-browser clients (no Origin header) like curl or health monitors.
       if (!origin) {
+        console.log('No origin header - allowing');
         callback(null, true)
         return
       }
 
       const normalizedOrigin = normalizeOrigin(origin)
+      console.log('Incoming request from:', normalizedOrigin);
+      
       if (allowedOrigins.includes(normalizedOrigin)) {
+        console.log('✓ Origin allowed');
         callback(null, true)
         return
       }
 
+      console.error('✗ CORS blocked:', normalizedOrigin);
+      console.error('  Expected one of:', allowedOrigins);
       callback(new Error('Not allowed by CORS'))
     },
   })
