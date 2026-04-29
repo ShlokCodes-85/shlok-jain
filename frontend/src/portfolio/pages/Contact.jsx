@@ -110,7 +110,10 @@ export default function Contact() {
     setStatus("sending");
 
     try {
-      const response = await fetch(`${apiBaseUrl}${apiBasePath}${contactRoutePath}`, {
+      const url = `${apiBaseUrl}${apiBasePath}${contactRoutePath}`;
+      console.log('Sending contact form to:', url);
+      
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -121,12 +124,15 @@ export default function Contact() {
       const data = await response.json();
 
       if (!response.ok) {
+        console.error('Backend error:', data.message || "Failed to send message");
         throw new Error(data.message || "Failed to send message");
       }
 
+      console.log('Message sent successfully');
       setStatus("sent");
       setForm({ name: "", email: "", subject: "", message: "" });
-    } catch {
+    } catch (error) {
+      console.error('Contact form error:', error.message || error);
       setStatus("error");
     }
   };

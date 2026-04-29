@@ -5,6 +5,7 @@ export const sendContactEmail = async (req, res) => {
   const errors = validationResult(req)
 
   if (!errors.isEmpty()) {
+    console.error('Validation errors:', errors.array());
     return res.status(400).json({
       success: false,
       message: 'Validation error',
@@ -20,6 +21,9 @@ export const sendContactEmail = async (req, res) => {
   const emailLabel = process.env.CONTACT_EMAIL_EMAIL_LABEL || 'Email:'
   const subjectLabel = process.env.CONTACT_EMAIL_SUBJECT_LABEL || 'Subject:'
   const messageLabel = process.env.CONTACT_EMAIL_MESSAGE_LABEL || 'Message:'
+
+  console.log('Attempting to send email to:', receiver);
+  console.log('From:', process.env.EMAIL_USER);
 
   try {
     await transporter.sendMail({
@@ -45,11 +49,14 @@ export const sendContactEmail = async (req, res) => {
       `,
     })
 
+    console.log('Email sent successfully');
     return res.status(200).json({
       success: true,
       message: 'Message sent successfully',
     })
   } catch (error) {
+    console.error('Email sending error:', error.message);
+    console.error('Error details:', error);
     return res.status(500).json({
       success: false,
       message: 'Failed to send message',
