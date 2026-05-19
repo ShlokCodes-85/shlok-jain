@@ -14,8 +14,8 @@ const STACK_CATEGORIES = [
   },
   {
     title: "Backend",
-    note: "Node.js and Express.js",
-    items: ["Node.js", "Express.js"],
+    note: "Node.js, Express.js, and FastAPI",
+    items: ["Node.js", "Express.js", "FastAPI"],
   },
   {
     title: "Databases",
@@ -24,14 +24,14 @@ const STACK_CATEGORIES = [
   },
   {
     title: "AI/ML",
-    note: "Numpy, Pandas, Matplotlib, Scikit-learn, TensorFlow",
+    note: "Numpy, Pandas, Matplotlib, Scikit-learn, and TensorFlow",
     items: ["Numpy", "Pandas", "Matplotlib", "Scikit-learn", "TensorFlow"],
   },
   {
     title: "Tools & DevOps",
-    note: "Git/GitHub, Vercel, Render, GCP, AWS",
+    note: "Git/GitHub, Vercel, Render, GCP, AWS, and Docker",
     subnote: "GCP and AWS are still in progress.",
-    items: ["Git", "GitHub", "Vercel", "Render", "GCP", "AWS"],
+    items: ["Git", "GitHub", "Vercel", "Render", "GCP", "AWS", "Docker"],
   },
 ];
 
