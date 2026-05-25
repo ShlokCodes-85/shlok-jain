@@ -7,7 +7,7 @@ import Home from './portfolio/pages/Home.jsx'
 import Experience from './portfolio/pages/Experience.jsx'
 import Navbar from './portfolio/components/Navbar.jsx'
 import Projects from './portfolio/pages/Projects.jsx'
-import ResumeViewer from './portfolio/pages/ResumeViewer.jsx'
+import Resume from './portfolio/pages/Resume.jsx'
 import Skills from './portfolio/pages/Skills.jsx'
 import LoaderPage from './LoaderPage.jsx'
 import { getSectionFromHash, scrollToSection, SECTION_IDS } from './portfolio/scrollToSection.js'
@@ -62,7 +62,7 @@ export default function App() {
         element={(
           <>
             <Navbar />
-            <ResumeViewer />
+            <Resume />
           </>
         )}
       />

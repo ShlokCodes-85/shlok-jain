@@ -9,7 +9,7 @@ const QUICK_LINKS = [
   { label: "Skills", sectionId: SECTION_IDS.skills },
   { label: "Projects", sectionId: SECTION_IDS.projects },
   { label: "Contact", sectionId: SECTION_IDS.contact },
-  { label: "Resume", href: "/Resume.pdf", external: true },
+  { label: "Resume", href: "/Shlok%20Jain%20CV.pdf", external: true },
 ];
 
 const SOCIAL_PATHS = {
