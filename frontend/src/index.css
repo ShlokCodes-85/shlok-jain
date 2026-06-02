@@ -25,6 +25,21 @@ html[data-theme="light"] .page-content iframe {
   filter: invert(1) hue-rotate(180deg);
 }
 
+/* Cancel the global inversion for specific UI elements that should keep their authored colors.
+   Use the `no-invert` class on elements inside .page-content to opt-out of the light-mode inversion. */
+html[data-theme="light"] .page-content .no-invert {
+  /* Opt-out: remove the inversion applied to .page-content so authored colors remain intact. */
+  filter: none !important;
+}
+
+/* Ensure embedded media inside .no-invert also do not get inverted. */
+html[data-theme="light"] .page-content .no-invert iframe,
+html[data-theme="light"] .page-content .no-invert img,
+html[data-theme="light"] .page-content .no-invert video,
+html[data-theme="light"] .page-content .no-invert canvas {
+  filter: none !important;
+}
+
 .section-divider {
   margin: 0;
   border: 0;
