@@ -9,7 +9,7 @@ const QUICK_LINKS = [
   { label: "Skills", sectionId: SECTION_IDS.skills },
   { label: "Projects", sectionId: SECTION_IDS.projects },
   { label: "Contact", sectionId: SECTION_IDS.contact },
-  { label: "Resume", href: "/Shlok%20Jain%20CV.pdf", external: true },
+  { label: "Resume", path: "/resume" },
 ];
 
 const SOCIAL_PATHS = {
@@ -20,7 +20,12 @@ const SOCIAL_PATHS = {
 };
 
 export default function Footer() {
-  const onLinkClick = (sectionId, href, external = false) => {
+  const onLinkClick = (sectionId, href, external = false, path) => {
+    if (path) {
+      window.location.pathname = path;
+      return;
+    }
+
     if (external && href) {
       window.open(href, "_blank", "noopener,noreferrer");
       return;
@@ -236,13 +241,13 @@ export default function Footer() {
             <div>
               <p className="footer-section-title">Quick Links</p>
               <div className="footer-quick-grid">
-                {QUICK_LINKS.map(({ label, sectionId, href, external }) => (
+                {QUICK_LINKS.map(({ label, sectionId, href, external, path }) => (
                   <a
                     key={label}
-                    href={external ? href : `#${sectionId}`}
+                    href={path || (external ? href : `#${sectionId}`)}
                     onClick={(e) => {
-                      if (!external) e.preventDefault();
-                      onLinkClick(sectionId, href, external);
+                      if (path || !external) e.preventDefault();
+                      onLinkClick(sectionId, href, external, path);
                     }}
                     target={external ? "_blank" : undefined}
                     rel={external ? "noopener noreferrer" : undefined}
