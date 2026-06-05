@@ -9,6 +9,8 @@ const NAV_LINKS = [
   { label: "Experience", sectionId: SECTION_IDS.experience },
   { label: "Skills", sectionId: SECTION_IDS.skills },
   { label: "Projects", sectionId: SECTION_IDS.projects },
+  { label: "Certifications", sectionId: SECTION_IDS.certifications },
+  { label: "Achievements", sectionId: SECTION_IDS.achievements },
   { label: "Contact", sectionId: SECTION_IDS.contact },
   { label: "Resume", path: "/resume" },
 ];
@@ -318,7 +320,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop nav links */}
-        <ul className="nav-links-desktop" style={{ display: "flex", gap: 32, listStyle: "none", margin: 0, padding: 0, alignItems: "center" }}>
+        <ul className="nav-links-desktop" style={{ display: "flex", gap: 20, listStyle: "none", margin: 0, padding: 0, alignItems: "center" }}>
           {NAV_LINKS.map(({ label, sectionId, path }) => {
             const isActive = path ? isResumeRoute : (isPortfolioRoute && activeSection === sectionId);
             return (

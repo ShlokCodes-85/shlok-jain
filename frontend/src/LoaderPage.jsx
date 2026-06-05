@@ -22,9 +22,26 @@ if (!apiBaseUrl) {
 
 const healthUrl = `${apiBaseUrl}${apiBasePath}${healthCheckPath}`
 
+const LOADING_MESSAGES = [
+  'Warming up the portfolio experience...',
+  'Fetching projects, skills, and achievements...',
+  'Almost there. Thanks for your patience!',
+]
+
 export default function LoaderPage({ onReady }) {
   const [status, setStatus] = useState('loading') // loading | ready | error
   const [errorMessage, setErrorMessage] = useState('')
+  const [messageIndex, setMessageIndex] = useState(0)
+
+  useEffect(() => {
+    const secondMessageTimer = setTimeout(() => setMessageIndex(1), 2000)
+    const finalMessageTimer = setTimeout(() => setMessageIndex(2), 7000)
+
+    return () => {
+      clearTimeout(secondMessageTimer)
+      clearTimeout(finalMessageTimer)
+    }
+  }, [])
 
   useEffect(() => {
     let isMounted = true
@@ -115,6 +132,10 @@ export default function LoaderPage({ onReady }) {
           animation: loader-pulse 1.2s ease-in-out infinite;
         }
 
+        .loader-message {
+          animation: loader-message-in 0.35s ease;
+        }
+
         @keyframes loader-spin {
           from {
             transform: rotate(0deg);
@@ -135,6 +156,18 @@ export default function LoaderPage({ onReady }) {
           50% {
             transform: scale(1.15);
             opacity: 1;
+          }
+        }
+
+        @keyframes loader-message-in {
+          from {
+            opacity: 0;
+            transform: translateY(5px);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0);
           }
         }
       `}</style>
@@ -194,11 +227,15 @@ export default function LoaderPage({ onReady }) {
           }}
         >
           <span className={`loader-dot${isLoading ? ' pulse' : ''}`} aria-hidden="true" />
-          <span>{isLoading ? 'Pinging backend' : 'Retry backend ping'}</span>
+          <span>{isLoading ? 'Loading portfolio' : 'Retry connection'}</span>
         </button>
 
-        <p style={{ marginTop: 18, fontSize: 15, lineHeight: 1.7, color: '#9BA9BA' }}>
-          {isLoading ? 'Checking server health before loading the portfolio.' : 'The backend did not respond as expected.'}
+        <p
+          key={isLoading ? messageIndex : 'error'}
+          className="loader-message"
+          style={{ marginTop: 18, fontSize: 15, lineHeight: 1.7, color: '#9BA9BA' }}
+        >
+          {isLoading ? LOADING_MESSAGES[messageIndex] : 'The portfolio could not connect to the server.'}
         </p>
 
         {errorMessage ? (

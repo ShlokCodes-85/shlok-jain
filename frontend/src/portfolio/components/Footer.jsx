@@ -8,6 +8,8 @@ const QUICK_LINKS = [
   { label: "Experience", sectionId: SECTION_IDS.experience },
   { label: "Skills", sectionId: SECTION_IDS.skills },
   { label: "Projects", sectionId: SECTION_IDS.projects },
+  { label: "Certifications", sectionId: SECTION_IDS.certifications },
+  { label: "Achievements", sectionId: SECTION_IDS.achievements },
   { label: "Contact", sectionId: SECTION_IDS.contact },
   { label: "Resume", path: "/resume" },
 ];

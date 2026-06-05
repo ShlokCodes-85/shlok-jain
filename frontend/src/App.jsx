@@ -1,6 +1,9 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
+import LoaderPage from './LoaderPage.jsx'
 import About from './portfolio/pages/About.jsx'
+import Achievements from './portfolio/pages/Achievements.jsx'
+import Certifications from './portfolio/pages/Certifications.jsx'
 import Contact from './portfolio/pages/Contact.jsx'
 import Footer from './portfolio/components/Footer.jsx'
 import Home from './portfolio/pages/Home.jsx'
@@ -37,6 +40,12 @@ function PortfolioPage() {
         <section id={SECTION_IDS.projects} style={{ scrollMarginTop: 64 }}>
           <Projects />
         </section>
+        <section id={SECTION_IDS.certifications} style={{ scrollMarginTop: 64 }}>
+          <Certifications />
+        </section>
+        <section id={SECTION_IDS.achievements} style={{ scrollMarginTop: 64 }}>
+          <Achievements />
+        </section>
         <section id={SECTION_IDS.contact} style={{ scrollMarginTop: 64 }}>
           <Contact />
         </section>
@@ -47,6 +56,13 @@ function PortfolioPage() {
 }
 
 export default function App() {
+  const [isReady, setIsReady] = useState(false)
+  const handleReady = useCallback(() => setIsReady(true), [])
+
+  if (!isReady) {
+    return <LoaderPage onReady={handleReady} />
+  }
+
   return (
     <Routes>
       <Route path="/" element={<PortfolioPage />} />

@@ -4,6 +4,8 @@ export const SECTION_IDS = {
   experience: 'experience',
   skills: 'skills',
   projects: 'projects',
+  certifications: 'certifications',
+  achievements: 'achievements',
   contact: 'contact',
 }
 

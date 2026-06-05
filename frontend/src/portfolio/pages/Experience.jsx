@@ -255,7 +255,7 @@ export default function Experience() {
           </div>
           <h2 style={{ fontFamily: "Syne, sans-serif", fontWeight: 800, fontSize: "clamp(24px,3.2vw,34px)", color: "#E6EDF3", marginBottom: 12, lineHeight: 1.08 }}>
             <span style={{ background: "linear-gradient(90deg,#85B7EB,#5DCAA5)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-              Internship
+              Professional
             </span>{" "}
             Experience
           </h2>
