@@ -71,8 +71,8 @@ const sendHealthResponse = (req, res) => {
   })
 }
 
-app.get(`${apiBasePath}${healthRoutePath}`, sendHealthResponse)
-app.get(`${apiBasePath}${healthCheckAliasPath}`, sendHealthResponse)
+app.head(`${apiBasePath}${healthRoutePath}`, sendHealthResponse)
+app.head(`${apiBasePath}${healthCheckAliasPath}`, sendHealthResponse)
 
 app.use(`${apiBasePath}${contactRoutePath}`, contactRoutes)
 

@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import LoaderPage from './LoaderPage.jsx'
 import About from './portfolio/pages/About.jsx'
 import Achievements from './portfolio/pages/Achievements.jsx'
 import Certifications from './portfolio/pages/Certifications.jsx'
@@ -56,13 +55,6 @@ function PortfolioPage() {
 }
 
 export default function App() {
-  const [isReady, setIsReady] = useState(false)
-  const handleReady = useCallback(() => setIsReady(true), [])
-
-  if (!isReady) {
-    return <LoaderPage onReady={handleReady} />
-  }
-
   return (
     <Routes>
       <Route path="/" element={<PortfolioPage />} />
